@@ -25,6 +25,15 @@ object Prefs {
     fun getNext(c: Context, s: Int): Long = sp(c).getLong("next_$s", 0L)
     fun setNext(c: Context, s: Int, t: Long) = sp(c).edit().putLong("next_$s", t).apply()
 
+    // المصحف: 0 = غير محدد، 1 = فولدر صور، 2 = ملف PDF
+    fun getMushafType(c: Context): Int = sp(c).getInt("mushaf_type", 0)
+    fun getMushafUri(c: Context): String? = sp(c).getString("mushaf_uri", null)
+    fun setMushaf(c: Context, type: Int, uri: String?) =
+        sp(c).edit().putInt("mushaf_type", type).putString("mushaf_uri", uri).apply()
+
+    fun getOffset(c: Context): Int = sp(c).getInt("offset", 0)
+    fun setOffset(c: Context, v: Int) = sp(c).edit().putInt("offset", v).apply()
+
     fun secondPage(p: Int): Int = p % TOTAL_PAGES + 1
     fun pagesText(p: Int): String = "صفحة $p و${secondPage(p)}"
 
